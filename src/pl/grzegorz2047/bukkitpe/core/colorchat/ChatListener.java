@@ -18,7 +18,7 @@ public class ChatListener implements Listener {
     public ChatListener(CoreAuth plugin) {
         this.plugin = plugin;
     }
-
+/*
     @EventHandler
     void onPreCommand(PlayerCommandPreprocessEvent e) {
         if (e.getMessage().startsWith("/version")) {
@@ -36,5 +36,5 @@ public class ChatListener implements Listener {
         e.setMessage(message);
         e.setFormat(format.replace("{DISPLAYNAME}", p.getDisplayName()).replace("{MESSAGE}", message).replace("{LANG}", user.getLanguage()));
     }
-
+*/
 }

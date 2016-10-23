@@ -35,8 +35,8 @@ public class CoreAuth extends PluginBase implements Listener {
     private Hikari hikari;
     private Auth auth;
     private ConfigManager configManager;
-    private HashMap<String, SQLUser> sqlUsers = new HashMap<String, SQLUser>();
-    private HashMap<String, String> settings = new HashMap<String, String>();
+    // private HashMap<String, SQLUser> sqlUsers = new HashMap<String, SQLUser>();
+    //private HashMap<String, String> settings = new HashMap<String, String>();
 
     @Override
     public void onEnable() {
@@ -48,6 +48,8 @@ public class CoreAuth extends PluginBase implements Listener {
                 configManager.getConfig().getString("auth.user"),
                 configManager.getConfig().getString("auth.password")
         );
+
+        /*
         playerManager = new DatabaseAPI(
                 configManager.getConfig().getString("players.host"),
                 configManager.getConfig().getInt("players.port"),
@@ -55,6 +57,7 @@ public class CoreAuth extends PluginBase implements Listener {
                 configManager.getConfig().getString("players.user"),
                 configManager.getConfig().getString("players.password"));
         this.settings = playerManager.getSettings();
+        */
         auth = new Auth(this);
         Server.getInstance().getPluginManager().registerEvents(new AuthListener(auth, this), this);
         Server.getInstance().getPluginManager().registerEvents(new ChatListener(this), this);
@@ -73,19 +76,19 @@ public class CoreAuth extends PluginBase implements Listener {
     @EventHandler
     void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        e.setJoinMessage("");
-        e.getPlayer().sendMessage("Witaj na serwerze testowym CraftGames!");
-        this.getPlayerManager().insertPlayer(p.getName(), p.getAddress());
-        SQLUser user = this.getPlayerManager().getPlayer(p.getName());
-        this.sqlUsers.put(p.getName(), user);
-        e.getPlayer().sendPopup("§6Witaj, " + user.getRank() + " o nicku " + p.getPlayer().getName(), "§cSerwer w fazie alpha!");
-        e.getPlayer().sendPopup("§6Witaj, " + user.getRank() + " o nicku " + p.getPlayer().getName(), "§cSerwer w fazie alpha!");
+        //e.setJoinMessage("");
+        //e.getPlayer().sendMessage("Witaj na serwerze testowym CraftGames!");
+        //this.getPlayerManager().insertPlayer(p.getName(), p.getAddress());
+        //SQLUser user = this.getPlayerManager().getPlayer(p.getName());
+        //this.sqlUsers.put(p.getName(), user);
+        //e.getPlayer().sendPopup("§6Witaj, " + user.getRank() + " o nicku " + p.getPlayer().getName(), "§cSerwer w fazie alpha!");
+        //e.getPlayer().sendPopup("§6Witaj, " + user.getRank() + " o nicku " + p.getPlayer().getName(), "§cSerwer w fazie alpha!");
     }
 
     @EventHandler
     void onJoin(PlayerQuitEvent e) {
         Player p = e.getPlayer();
-        this.sqlUsers.remove(p.getName());
+        //this.sqlUsers.remove(p.getName());
     }
 
     @EventHandler
@@ -138,12 +141,12 @@ public class CoreAuth extends PluginBase implements Listener {
     public Auth getAuth() {
         return auth;
     }
-
+/*
     public HashMap<String, SQLUser> getSqlUsers() {
         return sqlUsers;
     }
 
     public HashMap<String, String> getSettings() {
         return settings;
-    }
+    }*/
 }
