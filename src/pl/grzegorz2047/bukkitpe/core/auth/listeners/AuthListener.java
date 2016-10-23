@@ -44,7 +44,7 @@ public class AuthListener implements Listener {
         String regex2 = "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$";
         Player p = e.getPlayer();
         if (!auth.getAuthenticated().contains(p.getName()) && !e.getMessage().startsWith("/login") && !e.getMessage().startsWith("/register")) {
-            p.sendMessage("§cZaloguj sie aby moc rozmawiac!");
+            p.sendMessage("§cLog in to speak!");
             e.setCancelled(true);
         }
     }
@@ -56,43 +56,45 @@ public class AuthListener implements Listener {
         Server.getInstance().getScheduler().scheduleAsyncTask(new AsyncTask() {
             @Override
             public void onRun() {
-
-                Connection connection = null;
-                PreparedStatement statement = null;
-                try {
-                    connection = plugin.getHikari().getHikari().getConnection();
-                    String table = plugin.getConfigManager().getConfig().getString("auth.table");
-                    statement = connection.prepareStatement("SELECT username FROM " + table + " WHERE username = ?");
-                    statement.setString(1, player.getName());
-                    ResultSet set = statement.executeQuery();
-                    if (set.next()) {
-                        player.sendMessage("§2Zaloguj sie przy uzyciu komendy " + "§6/login haslo");
-                    } else {
-                        player.sendMessage("§aNie posiadasz konta, zarejestruj sie! " + "/register haslo email");
-                    }
-                } catch (SQLException ex) {
-                    System.out.print(ex.getCause() + " " + ex.getMessage());
-
-                    player.kick("§cProblem z baza danych, zglos administracji!");
-                } finally {
-                    try {
-                        if (connection != null) {
-                            connection.close();
-                        }
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
-                    try {
-                        if (statement != null) {
-                            statement.close();
-                        }
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
-                }
-
+                loginPlayer(player);
             }
         });
+    }
+
+    private void loginPlayer(Player player) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = plugin.getHikari().getHikari().getConnection();
+            String table = plugin.getConfigManager().getConfig().getString("auth.table");
+            statement = connection.prepareStatement("SELECT username FROM " + table + " WHERE username = ?");
+            statement.setString(1, player.getName());
+            ResultSet set = statement.executeQuery();
+            if (set.next()) {
+                player.sendMessage("§2Log in using " + "§6/login password");
+            } else {
+                player.sendMessage("§aYou dont have account! Create one using " + "/register password email");
+            }
+        } catch (SQLException ex) {
+            System.out.print(ex.getCause() + " " + ex.getMessage());
+
+            player.kick("§cIssues with database. Contact with Administrators!");
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     @EventHandler

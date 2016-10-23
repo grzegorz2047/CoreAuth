@@ -90,7 +90,7 @@ public class Hikari {
     public boolean executeLogin(CommandSender sender, String[] strings) {
         Player player = (Player) sender;
         if (strings.length != 1) {
-            player.sendMessage("§cPoprawne uzycie: /login haslo");
+            player.sendMessage("§cUSage: /login password");
             return false;
         }
         Connection connection = null;
@@ -110,7 +110,7 @@ public class Hikari {
             if (set.next()) {
                 passwordFromDB = set.getString("password");
             } else {
-                player.sendMessage("§2Nie posiadasz konta, zarejestruj sie! " + "/register haslo email");
+                player.sendMessage("§2You don't have account! Register using " + "/register password email");
             }
         } catch (SQLException ex) {
             ex.getStackTrace();
@@ -171,10 +171,10 @@ public class Hikari {
 
 
             plugin.getAuth().getAuthenticated().add(player.getName());
-            player.sendMessage("§2Podales prawidlowe haslo, zostales zalogowany!");
+            player.sendMessage("§2Logged in!");
             return true;
         } else {
-            player.sendMessage("§cPodales zle haslo!");
+            player.sendMessage("§cYou typed wrong password!");
             return false;
         }
     }
@@ -182,8 +182,8 @@ public class Hikari {
     public void executeRegister(CommandSender sender, String[] strings) {
         Player player = (Player) sender;
         if (strings.length != 2) {
-            player.sendMessage("Poprawne uzycie: /register twojehaslo twojemail");
-            player.sendMessage("Przykladowe uzycie: /register mojehaslo mojemail@gmail.com");
+            player.sendMessage("Usage: /register yourpassword twojemail");
+            player.sendMessage("Example usage: /register mypassword mymail@gmail.com");
             return;
         }
         Connection connection = null;
@@ -196,7 +196,7 @@ public class Hikari {
             statement.setString(1, player.getName());
             ResultSet set = statement.executeQuery();
             if (set.next()) {
-                player.sendMessage("Posiadasz juz konto, zaloguj sie! " + "/login haslo");
+                player.sendMessage("You already have an account! Log in using " + "/login password");
                 return;
             }
         } catch (SQLException ex) {
@@ -220,7 +220,7 @@ public class Hikari {
 
         String password = strings[0];
         if (player.getName().length() < 3) {
-            player.sendMessage("Posiadasz zbyt krotki nick... Min: 3 znakow");
+            player.sendMessage("Too short username! You need at least 3 letters username");
             return;
         }
         Pattern pattern;
@@ -229,21 +229,21 @@ public class Hikari {
         pattern = Pattern.compile(USERNAME_PATTERN);
         matcher = pattern.matcher(player.getName());
         if (!matcher.matches()) {
-            player.sendMessage("Twoj nick posiada niepoprawne znaki! Zmien nick!");
+            player.sendMessage("Illegal characters! Fix your username!");
             return;
         }
         if (player.getName().length() < 3) {
-            player.sendMessage("Posiadasz zbyt krotki nick... Min: 3 znakow");
+            player.sendMessage("Too short username! You need at least 3 letters username");
             return;
         }
         if (password.length() < 6) {
-            player.sendMessage("Podales zbyt krotkie haslo... Min: 6 znakow");
+            player.sendMessage("Your password needs to be at least 6 letters long");
             return;
         }
 
         String email = strings[1];
         if (email.length() < 6 || !email.contains("@") || !email.contains(".")) {
-            player.sendMessage("Podales nieprawidlowy email. Bedzie on potrzebny do odzyskania konta !");
+            player.sendMessage("You typed incorrect email! You'll need it to recover your account!");
             return;
         }
         String hash = "";
@@ -293,7 +293,7 @@ public class Hikari {
                 ex.printStackTrace();
             }
 
-            player.sendMessage("Zostales zarejestrowany!");
+            player.sendMessage("You're now registered! Log in to play!");
         }
 
     }
@@ -303,7 +303,7 @@ public class Hikari {
 
 
         if (strings.length != 2) {
-            player.sendMessage("§cPoprawne uzycie: /changepassword stare_haslo nowe_haslo");
+            player.sendMessage("§cUsage: /changepassword oldpass newpass");
             return;
         }
 
@@ -319,7 +319,7 @@ public class Hikari {
             statement.setString(1, player.getName());
             ResultSet set = statement.executeQuery();
             if (!set.next()) {
-                player.sendMessage("§aNie posiadasz konta, zarejestruj sie! " + "/register haslo");
+                player.sendMessage("§2You don't have account! Register using " + "/register password email");
                 return;
             }
         } catch (SQLException ex) {
@@ -377,7 +377,7 @@ public class Hikari {
         }
         if (isGood) {
             if (newPassword.length() < 6) {
-                player.sendMessage("§cPodales zbyt krotkie haslo... Min: 6 znakow");
+                player.sendMessage("Your password needs to be at least 6 letters long");
                 return;
             } else {
                 String newHash = "";
@@ -412,9 +412,9 @@ public class Hikari {
                     }
                 }
             }
-            player.sendMessage("§2Haslo zostalo zmienione, mozesz sie zalogowac!");
+            player.sendMessage("§2Password changed! You can now log in!");
         } else {
-            player.sendMessage("§cStare haslo jest bledne!");
+            player.sendMessage("§cOld password incorrect!");
         }
     }
 

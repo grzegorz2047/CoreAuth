@@ -1,4 +1,4 @@
-name: CraftGamesPlugin
+name: CoreAuth
 main: pl.grzegorz2047.bukkitpe.core.CoreAuth
 api: 1.0.0
 version: 1.0.0
