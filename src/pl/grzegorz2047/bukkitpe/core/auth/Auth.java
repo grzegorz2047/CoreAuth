@@ -1,7 +1,7 @@
 package pl.grzegorz2047.bukkitpe.core.auth;
 
 
-import pl.grzegorz2047.bukkitpe.core.Core;
+import pl.grzegorz2047.bukkitpe.core.CoreAuth;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -13,11 +13,11 @@ import java.util.*;
  */
 public class Auth {
 
-    public Core plugin;
+    public CoreAuth plugin;
     private final Random random = new Random();
     private ArrayList<String> authenticated = new ArrayList<String>();
 
-    public Auth(Core plugin) {
+    public Auth(CoreAuth plugin) {
         this.plugin = plugin;
     }
 

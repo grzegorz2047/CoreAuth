@@ -29,7 +29,7 @@ import java.util.HashMap;
 /**
  * Created by grzeg on 17.08.2016.
  */
-public class Core extends PluginBase implements Listener {
+public class CoreAuth extends PluginBase implements Listener {
 
     private DatabaseAPI playerManager;
     private Hikari hikari;

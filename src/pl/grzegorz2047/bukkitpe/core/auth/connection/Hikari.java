@@ -3,7 +3,7 @@ package pl.grzegorz2047.bukkitpe.core.auth.connection;
 import com.zaxxer.hikari.HikariDataSource;
 import net.BukkitPE.Player;
 import net.BukkitPE.command.CommandSender;
-import pl.grzegorz2047.bukkitpe.core.Core;
+import pl.grzegorz2047.bukkitpe.core.CoreAuth;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
@@ -15,11 +15,11 @@ import java.util.regex.Pattern;
  */
 public class Hikari {
 
-    private Core plugin;
+    private CoreAuth plugin;
 
     private HikariDataSource hikari;
 
-    public Hikari(Core plugin, String host, int port, String db, String user, String password) {
+    public Hikari(CoreAuth plugin, String host, int port, String db, String user, String password) {
         hikari = new HikariDataSource();
         //hikari.setMaximumPoolSize(20);
         this.plugin = plugin;

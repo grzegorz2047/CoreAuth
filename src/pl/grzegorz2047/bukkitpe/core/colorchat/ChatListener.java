@@ -1,12 +1,11 @@
 package pl.grzegorz2047.bukkitpe.core.colorchat;
 
 import net.BukkitPE.Player;
-import net.BukkitPE.Server;
 import net.BukkitPE.event.EventHandler;
 import net.BukkitPE.event.Listener;
 import net.BukkitPE.event.player.PlayerChatEvent;
 import net.BukkitPE.event.player.PlayerCommandPreprocessEvent;
-import pl.grzegorz2047.bukkitpe.core.Core;
+import pl.grzegorz2047.bukkitpe.core.CoreAuth;
 import pl.grzegorz2047.databaseapi.SQLUser;
 
 /**
@@ -14,9 +13,9 @@ import pl.grzegorz2047.databaseapi.SQLUser;
  */
 public class ChatListener implements Listener {
 
-    private final Core plugin;
+    private final CoreAuth plugin;
 
-    public ChatListener(Core plugin) {
+    public ChatListener(CoreAuth plugin) {
         this.plugin = plugin;
     }
 

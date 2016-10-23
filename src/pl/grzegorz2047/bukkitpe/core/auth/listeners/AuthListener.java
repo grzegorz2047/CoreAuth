@@ -11,7 +11,7 @@ import net.BukkitPE.event.block.BlockPlaceEvent;
 import net.BukkitPE.event.entity.EntityDamageByEntityEvent;
 import net.BukkitPE.event.player.*;
 import net.BukkitPE.scheduler.AsyncTask;
-import pl.grzegorz2047.bukkitpe.core.Core;
+import pl.grzegorz2047.bukkitpe.core.CoreAuth;
 import pl.grzegorz2047.bukkitpe.core.auth.Auth;
 
 import java.sql.Connection;
@@ -26,9 +26,9 @@ public class AuthListener implements Listener {
 
     private final Auth auth;
 
-    public Core plugin;
+    public CoreAuth plugin;
 
-    public AuthListener(Auth auth, Core plugin) {
+    public AuthListener(Auth auth, CoreAuth plugin) {
         this.auth = auth;
         this.plugin = plugin;
     }

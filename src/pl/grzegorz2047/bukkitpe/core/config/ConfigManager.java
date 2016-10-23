@@ -1,7 +1,7 @@
 package pl.grzegorz2047.bukkitpe.core.config;
 
 import net.BukkitPE.utils.Config;
-import pl.grzegorz2047.bukkitpe.core.Core;
+import pl.grzegorz2047.bukkitpe.core.CoreAuth;
 
 import java.io.File;
 
@@ -12,11 +12,11 @@ public class ConfigManager {
 
     Config conf;
 
-    public ConfigManager(Core core) {
-        if(!new File(core.getDataFolder() + "").exists()){
-            new File(core.getDataFolder() + "").mkdir();
+    public ConfigManager(CoreAuth coreAuth) {
+        if(!new File(coreAuth.getDataFolder() + "").exists()){
+            new File(coreAuth.getDataFolder() + "").mkdir();
         }
-        String path = core.getDataFolder() + File.separator + "config.yml";
+        String path = coreAuth.getDataFolder() + File.separator + "config.yml";
         if (!new File(path).exists()) {
             conf = new Config(path, Config.YAML);
             conf.save();
