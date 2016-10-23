@@ -1,0 +1,14 @@
+auth:
+  host: 'localhost'
+  db: ' '
+  port: 3306
+  table: ' '
+  user: ' '
+  password: ' '
+players:
+  host: 'localhost'
+  db: ' '
+  port: 3306
+  table: ' '
+  user: ' '
+  password: ' '
